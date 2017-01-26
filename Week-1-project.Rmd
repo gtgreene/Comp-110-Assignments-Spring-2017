@@ -13,4 +13,4 @@ library(DataComputing)
 The [2009 Inaguration of Barack Obama](https://en.wikipedia.org/wiki/First_inauguration_of_Barack_Obama)
 * Barack Obama was the 44th president
 * The crowd was estimated to be about 1.1 million
-Here is a [picture](https://en.wikipedia.org/wiki/First_inauguration_of_Barack_Obama#/media/File:Crowd_at_National_Mall_for_Obama_inauguration_1-20-09_hires_090120-F-6184M-007a.jpg) of the crowd
+- Here is a [picture](https://en.wikipedia.org/wiki/First_inauguration_of_Barack_Obama#/media/File:Crowd_at_National_Mall_for_Obama_inauguration_1-20-09_hires_090120-F-6184M-007a.jpg) of the crowd
