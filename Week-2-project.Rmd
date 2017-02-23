@@ -1,6 +1,6 @@
 # Week 2 Project
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,18 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+I downlaoded the data "Librar-small.rda" provided by professor Danny Kaplan (https://dtkaplan.github.io/comp110/Projects/251-Library-Books-github.html).
+
+##Basics
+```{r}
+load("Library-small.rda")
+```
+
+```{r}
+nrow(Bks)
+nrow(Inv)
+```
+```{r}
+names(Bks)
+names(Inv)
+```
