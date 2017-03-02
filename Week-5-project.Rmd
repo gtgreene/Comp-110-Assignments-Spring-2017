@@ -1,6 +1,6 @@
 # Week 5 Project
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,31 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+A Graph for the Economist
+
+```{r eval = FALSE}
+download.file("http://tiny.cc/dcf/ScorecardSmall.Rda", 
+              destfile = "ScorecardSmall.Rda")
+```
+```{r}
+load("ScorecardSmall.Rda")
+```
+
+```{r}
+Public_Private <- ScorecardSmall %>%
+  filter(CONTROL != 3) %>%
+  select(NPT41_PUB, NPT41_PRIV, NPT43_PUB, NPT43_PRIV, NPT45_PUB, NPT45_PRIV, CONTROL, ADM_RATE) %>%
+  filter(! is.na(ADM_RATE)) %>%
+  gather (key = Q, value = cost, NPT41_PUB, NPT41_PRIV, NPT43_PUB, NPT43_PRIV, NPT45_PUB, NPT45_PRIV)
+```
+```{r}
+translate<-read.csv("CollegeData - Sheet1.csv")
+```
+```{r}
+Public_Private%>%
+  left_join(translate) %>%
+  ggplot(aes(x=ADM_RATE, y = cost)) + 
+  geom_point(alpha= 0.1, color="turquoise") +
+  facet_grid(CONTROL~Quintile) +
+  geom_smooth(color="black")
+```
