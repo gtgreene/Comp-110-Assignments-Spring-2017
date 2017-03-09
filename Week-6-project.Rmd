@@ -1,6 +1,6 @@
 # Week 6 Project
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -9,5 +9,23 @@ Compiled on `r date()`.
 library(DataComputing)
 ```
 <!-- put your content after this line -->
-
-Here is my content!
+```{r cahc = TRUE}
+data_site <- 
+  "http://tiny.cc/dcf/2014-Q4-Trips-History-Data-Small.rds" 
+Trips <- readRDS(gzcon(url(data_site)))
+```
+1.
+```{r}
+Trips %>%
+  ggplot(aes(x = sdate)) + 
+  geom_density(bw=100000)
+```
+2. 
+```{r}
+Trips %>% 
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60) %>%
+  ggplot(aes(x= time_of_day)) + 
+  geom_density()
+```
