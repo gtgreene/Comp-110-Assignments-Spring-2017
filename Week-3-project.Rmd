@@ -1,13 +1,65 @@
 # Week 3 Project
 
-## Your name should appear here! 
+## Gretchen Greene 
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+What mode of graphic is it?
+Figure 1 shows a display of distribution. 
+
+What variables from the respective data tables are involved?
+The variables involved are density, bmi, sex, and pregnant or not.
+
+What role each of those variables plays in the graphic?
+bmi is the measured quantity mapped along the x-axis. The y axis corresponds to density which is the number of cases corresponding to each x value. The color corresponds to pregnant yes or no.
+
+In Figure 2, why is there no data variable being used for the y-axis?
+----No figure 2....
+
+```{r}
+#ggplot(data = CPS85, aes(x = ????, y = ????, color = ????)) + geom_point() + facet_wrap( ~ ????)
+
+ggplot(data = NCHS, aes(x = bmi) + geom_density(aes(color = 'red)) + facet_wrap(sex)
+```
+Wrangling
+```{r}
+help("diamonds")
+```
+1. Which color diamonds seem to be largest on avergage?
+```{r}
+diamonds%>%
+  group_by(color)%>%
+  summarise(size=mean(carat))%>%
+  arrange(desc(size))%>%
+  head(1)
+```
+J..?
+2. Which clarity of diamonds has the largest average "table" per carat?
+```{r}
+diamonds%>%
+  group_by(clarity)%>%
+  summarize(avgtable=mean(table))%>%
+  arrange(desc(avgtable))%>%
+  head(1)
+```
+11..?
+
+Voting:
+```{r}
+Minneapolis2013%>%
+  summarise(total=n())
+```
+1. 80101 cases
+2. 
+```{r}
+help("Minneapolis2013")
+Minneapolis2013%>%
+  
+```
