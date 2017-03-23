@@ -29,3 +29,50 @@ Trips %>%
   ggplot(aes(x= time_of_day)) + 
   geom_density()
 ```
+3. 
+```{r}
+Trips %>% 
+  mutate(day_of_week = 
+       lubridate::wday(sdate))%>%
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60) %>%
+  ggplot(aes(x= time_of_day)) + 
+  geom_density() +
+    facet_wrap(~day_of_week)
+```
+4.
+```{r}
+Trips %>% 
+  mutate(day_of_week = 
+       lubridate::wday(sdate))%>%
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60) %>%
+  ggplot(aes(x= time_of_day)) + 
+  geom_density(aes(fill=client),alpha=0.5) +
+    facet_wrap(~day_of_week)  
+```
+5. 
+```{r}
+Trips %>% 
+  mutate(day_of_week = 
+       lubridate::wday(sdate))%>%
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60) %>%
+  ggplot(aes(x= time_of_day)) + 
+  geom_density(aes(fill=client),alpha=0.5, position = position_stack()) +
+    facet_wrap(~day_of_week)  
+```
+6. 
+```{r}
+Trips %>% 
+  mutate(wday = ifelse(lubridate::wday(sdate) %in% c(1,7), "weekend", "weekday")) %>%
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60) %>%
+  ggplot(aes(x= time_of_day)) + 
+  geom_density(aes(fill=client),alpha=0.5, position = position_stack()) +
+    facet_wrap(~wday)
+```
