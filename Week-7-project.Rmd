@@ -1,6 +1,6 @@
 # Week 7 Project
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -9,5 +9,49 @@ Compiled on `r date()`.
 library(DataComputing)
 ```
 <!-- put your content after this line -->
-
-Here is my content!
+Scraping Nuclear Reactors
+```{r}
+library(rvest)
+library(lubridate)
+page <- "http://en.wikipedia.org/wiki/List_of_nuclear_reactors"
+table_nodes <- page %>%
+  read_html() %>%
+  html_nodes("table")
+table_list <-
+  html_table(table_nodes[1:30], fill = TRUE)
+```
+```{r}
+table = table_list[[24]]
+names(table)
+new_names <- c("name","reactor no","type","model","status","Capacity in MW Net","Capacity in MW gross", "Construction start date", "Commercial Operation Date", "Closure")
+names(table) <- new_names
+table <- table [-1,]
+formatedConstructionDate <- lubridate::dmy(table$`Construction start date`)
+table$`Construction start date` <- formatedConstructionDate
+formatedCommercialDate <- lubridate::dmy(table$`Commercial Operation Date`)
+table$`Commercial Operation Date`<- formatedCommercialDate
+formatedClosure <- lubridate::dmy(table$Closure)
+table$Closure <- formatedClosure
+table_new <- 
+  table %>%
+  mutate(`Capacity in MW Net` = as.numeric(`Capacity in MW Net`))
+table_new <-
+  table_new %>%
+  mutate (`Capacity in MW gross`= as.numeric(`Capacity in MW gross`))
+table_final <-
+  table_new %>%
+  mutate (`reactor no`= as.numeric(`reactor no`))
+```
+#A quick visualization
+```{r}
+table_final %>%
+  ggplot(aes(x=`Commercial Operation Date`, y = `Capacity in MW gross`))+
+  geom_point(aes(color=type))
+```
+#Construction Delays
+```{r}
+table_final %>%
+  mutate(ID= paste(`name`, `reactor no`)) %>%
+  ggplot( aes(x= `Construction start date`, y = ID))+
+  geom_segment(aes(xend=`Commercial Operation Date`, yend=ID))
+```
