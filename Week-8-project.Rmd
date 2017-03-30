@@ -1,13 +1,65 @@
 # Week 8 Project
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(ISLR)
+library(ggdendro)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+Dists <- dist(mtcars)
+Dendrogram <- hclust(Dists)
+ddata <- dendro_data(Dendrogram)
+ggdendrogram(Dendrogram, rotate = TRUE) +
+  geom_text(data = ddata$labels, aes(x=x, y=y, label = label), vjust = 0) 
+```
+
+```{r}
+data(NCI60, package="DataComputing")
+Narrow <- 
+  NCI60 %>%
+  gather(value=expression, key=cellLine, -Probe) %>%
+  group_by(Probe, cellLine) %>%
+  summarise(expression = mean(expression)) %>% 
+  ungroup()
+keep <- 500
+Best <-
+  Narrow %>%
+  group_by(Probe) %>%
+  summarise(spread = sd(expression)) %>%
+  arrange(desc(spread)) %>%
+  mutate(i = row_number()) %>%
+  head(keep)
+Randomized <-
+  Narrow %>%
+  mutate(Probe = shuffle(Probe)) %>%
+  group_by(Probe) %>%
+  summarise(spread = sd(expression)) %>%
+  arrange(desc(spread)) %>%
+  mutate(i = row_number()) %>%
+  head(keep)
+Best %>% 
+  ggplot(aes(x=i, y=spread)) + 
+  geom_line() +
+  geom_line(data=Randomized, color="red", size=1, alpha=.5)
+Keepers <-
+  Narrow %>% group_by(Probe) %>%
+  filter(sd(expression) > 4.5)
+Keepers <-
+  Keepers %>%
+  spread(key=Probe, value=expression)
+scale_colour_discrete <- function(...) scale_colour_hue(...)
+```
+```{r}
+Dists <- dist(Keepers)
+Dendrogram <- hclust(Dists)
+ddata <- dendro_data(Dendrogram)
+ggdendrogram(Dendrogram, rotate = TRUE) +
+  geom_text(data = ddata$labels, aes(x=x, y=y, label= label, color = label), vjust = 0) 
+```
