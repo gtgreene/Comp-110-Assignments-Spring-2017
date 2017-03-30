@@ -25,3 +25,13 @@ nrow(Inv)
 names(Bks)
 names(Inv)
 ```
+```{r}
+Inv %>%
+  group_by(Current.Status) %>%
+  tally()
+```
+```{r}
+Inv %>%
+  group_by(Issued.Count) %>%
+  tally()
+```
