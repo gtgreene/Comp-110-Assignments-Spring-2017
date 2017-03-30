@@ -11,8 +11,27 @@ library(mosaicData)
 ```
 <!-- put your content after this line -->
 
+----Figure 1....
+
+```{r}
+ggplot(data = CPS85, aes(x = exper, y = wage, color = married)) + geom_point() + facet_wrap( ~ sector)
+```
 What mode of graphic is it?
-Figure 1 shows a display of distribution. 
+A scatter plot
+
+What variables from the respective data tables are involved?
+The variables involved are experience, Wage, married, sector
+
+What role each of those variables plays in the graphic?
+The x-axis is exper level, wage is the y variable, the graphic is faceted by sector, and it is colored by married or not
+
+
+Figure 2
+```{r}
+ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(fill = sex, alpha= 0.5)) + facet_wrap(~pregnant)
+```
+What mode of graphic is it?
+Figure 2 is a density plot
 
 What variables from the respective data tables are involved?
 The variables involved are density, bmi, sex, and pregnant or not.
@@ -21,13 +40,8 @@ What role each of those variables plays in the graphic?
 bmi is the measured quantity mapped along the x-axis. The y axis corresponds to density which is the number of cases corresponding to each x value. The color corresponds to pregnant yes or no.
 
 In Figure 2, why is there no data variable being used for the y-axis?
-----No figure 2....
+There is no variable becuase it is a density plot. Density is the y axis.
 
-```{r}
-#ggplot(data = CPS85, aes(x = ????, y = ????, color = ????)) + geom_point() + facet_wrap( ~ ????)
-
-ggplot(data = NCHS, aes(x = bmi) + geom_density(aes(color = 'red)) + facet_wrap(sex)
-```
 Wrangling
 ```{r}
 help("diamonds")
@@ -36,11 +50,12 @@ help("diamonds")
 ```{r}
 diamonds%>%
   group_by(color)%>%
-  summarise(size=mean(carat))%>%
+  summarize(size = mean(carat)) %>%
   arrange(desc(size))%>%
   head(1)
 ```
-J..?
+Color J has the largest on average size of 1.16137
+
 2. Which clarity of diamonds has the largest average "table" per carat?
 ```{r}
 diamonds%>%
@@ -49,17 +64,53 @@ diamonds%>%
   arrange(desc(avgtable))%>%
   head(1)
 ```
-11..?
+11 has the largest avgtable of 58.30378
 
 Voting:
 ```{r}
-Minneapolis2013%>%
-  summarise(total=n())
+Minneapolis2013 %>% nrow()
 ```
 1. 80101 cases
-2. 
 ```{r}
-help("Minneapolis2013")
-Minneapolis2013%>%
-  
+Minneapolis2013 %>%
+  group_by(Second) %>%
+  summarise(votes=n()) %>%
+  arrange(desc(votes)) %>%
+  head(5)
 ```
+2. The top 5 canidates in the second vote selesctions were: Betsy Hodges, Don Samuels, Mark Andrew, undervote, Jackie Cherryhomes
+
+```{r}
+Minneapolis2013 %>%
+  filter(First =='undervote')%>%
+  tally()
+
+Minneapolis2013 %>%
+  filter(Second == 'undervote') %>%
+  tally()
+
+Minneapolis2013 %>%
+  filter(Third == 'undervote') %>%
+  tally()
+```
+3. a) 834 undervotes in first choice
+b) 10598 undervotes in second choice
+c) 19210 undervotes in third choice 
+```{r}
+Minneapolis2013 %>% 
+  filter(First=='BETSY HODGES') %>%
+  group_by(Second)%>%
+  summarise(votes=n())%>%
+  arrange(desc(votes))%>%
+  head(3)
+```
+4. top 3 second vote selesctions among people who voted for Betsy Hodges: 1. Mark Andrew: 8787 votes, 2. Don Samuels: 8743 votes, 3. Jackie Cherryhomes: 2563 votes
+
+```{r}
+Minneapolis2013 %>%
+  group_by(Precinct) %>%
+  summarise(fraction = base::mean(First=='undervote')) %>%
+  arrange(desc(fraction))%>%
+  head(1)
+```
+  5. Precinct P-6C had the highest fraction of First vote selections marked as "undervote".
