@@ -1,6 +1,6 @@
 # Week 2 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -9,5 +9,175 @@ Compiled on `r date()`.
 library(DataComputing)
 ```
 <!-- put your content after this line -->
+1.1, 1.2, 1.4, 1.5
+2.2, 2.3, 2.4, 2.6, 2.7, 2.8, 2.8, 2.9, 2.10
+3.1, 3.2, 3.3, 3.4, 3.5, 3.6
+4.1, 4.2, 4.3, 4.4, 4.5
 
-Here is my content!
+1.1
+a) 3. It's the value of a variable for a particular case. b) 2. quantitative variable c) 1. Categorical d) 1. categorical e) 2. quantitative variable
+
+1.2
+The label 'in office' is not a descritive variable name. The entry 'it depends' does not fit with the categoriy name of 'number of states'. The president entry names do not follow the same structure. Abraham Lincoln is entered 'Lincoln, Abraham' and George Washington is entered "George Washington'.
+
+1.3 
+Make a table? HOW
+
+1.4 
+1. Table A: Year, Algeria, Brazil, Columbia
+Table B: Country Y2000 Y2001
+Table C: COuntry, Year, Value
+
+1.5 
+1. 7 Variables in airports
+2. The cases represent specific airports
+3. faa- airport code name, quanitative 
+airport name quantitative,
+lat,lon- coordinate location, numerical,
+alt-altitude numerical,
+tz- timezone quantitative,
+dst- day light savings quantitative,
+tzone- IANA time zone quantitative
+
+2.2
+2. Named arguments, File name, (Quotes are used when there is a string of characters)
+
+2.3
+```{r}
+View(CPS85)
+```
+CPS stands for current population surrvey
+
+2.4
+The part of the statement package <- "NHANES" does not make sense. Instead it should be package = "NHANES"
+
+2.6
+1. essay14- legitimate object
+2. first-essay- legitimate object
+3. "MyData"- not legitimate obejct because it is in quotes
+4. third_essay - legitamte object
+5. 
+
+2.7
+```{r}
+data(flights, package ="nycflights13")
+variable.names(flights)
+flights %>% nrow()
+```
+1. 19 variables
+2. 336776 cases
+3. Each case is a flight
+4. [1] "year" : quantitative    
+"month"   quantitative
+"day" quantitative          
+"dep_time" quntitative       
+ "sched_dep_time" quantitative
+ "dep_delay"  quantitative   
+"arr_time"  quanititative     
+"sched_arr_time" quantitative
+"arr_delay" quantitative
+"carrier"  categorical      
+"flight"   categorical?      
+"tailnum" categorical      
+"origin"    categorical     
+"dest"    categorical       
+"air_time"  quantitative    
+"distance"  quantitative    
+"hour"    quantitative    
+"minute" quantitative       
+"time_hour" quantitative
+5. 
+air_time: unit- minutes
+distance: unit- miles
+
+2.8
+a) 3. improper syntax for function argument
+b) 3. improper syntax for function argument....?
+
+2.9
+. and _ can be used in the name of an R object
+all of these can be used in a quoted character string.
+
+2.10
+```{r}
+variable.names(CountryData)
+nrow(WorldCities)
+```
+76 variables in CountryData
+tfat measures mass of trunk fat
+23018 cases in WorldCities
+Party affiliation: DEM=Democratic, LIB=Libertarian,REP=Republican,UNA=Unaffiliated
+
+3.1
+1. fireplace %>%
+2. fireplace(year)
+3. summarize(fireplace)
+4. filter(fireplace)
+
+3.2
+You cannot have the <- and then th %>% symbols
+
+3.3 
+it should say "package =" not "package <-"
+
+3.4
+1) BabyNames b) data table name
+2) Filter a) function name
+3) name c) variable 
+4) == a) function (infix function)
+5) group_by a) function
+6) year c) variable 
+7) sex c) variable ??
+8) summarise a) function name
+9) yearlyTotal c) variable name
+10) sum a) function
+11) count ?
+12) ggplot a) function
+13) aes ??
+14) x 
+15) y
+16) geom_point a) function
+17) color c) variable
+18) geom_vline a) function
+19)xintercept d) name of a named argument
+
+3.5) 
+a) brainwt is the brain weight in kg
+```{r}
+nrow(msleep)
+```
+b) 83 cases
+c) each case is a different animal
+d) The vore variable is either a carnivoe, omnivore, or herbivore
+
+3.6)
+c does not accomplish the same thing as the other functions
+
+3.7)
+An object cannot start with a digit. The name cannot have any punctuation except . and _
+
+4.1)*one* it will be rendered in italics
+**two** it will be bold
+* three this will be an ordered list
+# four this is Header 1
+`five` 
+## six this is Header 2. It is smaller than header 1
+
+4.2)
+a) it should be ``` not '''
+b) it should be ``` not """" and {r} not (r)
+c) it is missing a ` at the end 
+d) the ``` need to be on a new line
+e) there is an extra ` at the end
+
+4.3) Sketched out on paper...
+
+4.4) 
+1. neither
+2. Both URL or file
+3. neither
+4. URL
+5. neither
+6. URL
+
+4.5) did in separate rmd file...
