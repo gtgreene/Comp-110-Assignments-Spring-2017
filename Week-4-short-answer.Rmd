@@ -1,13 +1,90 @@
 # Week 4 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(ggplot2)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+8.1, 8.2, 8.3,
+9.1, 9.3
+
+8.1)
+1) c) ggplot()
+2) a) geom_point()
+3) e) ylab()
+4) facet_wrap()
+5) d) scale_y_log10()
+
+8.2) 
+1)
+```{r}
+CPS85%>%
+  ggplot(aes(x=age, y=wage)) + geom_point( aes(shape=married)) + facet_wrap(~sector)
+```
+2)
+```{r}
+CPS85 %>%
+  ggplot(aes(x=age, y=wage))+ geom_point()+ facet_grid(sex ~ married)
+```
+
+8.3)
+A)
+```{r}
+CPS85%>%
+  ggplot(aes(x=age, y= wage)) + geom_point()
+```
+b)
+```{r}
+CPS85%>%
+  ggplot(aes(x=age, y= wage)) + geom_point(aes(shape=sex))
+```
+c)
+```{r}
+CPS85%>%
+  ggplot(aes(x=age, y= wage)) + geom_point(aes(shape=sex)) + facet_grid(married~.)
+```
+d) 
+```{r}
+CPS85%>%
+  ggplot(aes(x=age, y= wage)) + geom_point(aes(shape=married))+ ylim(0,30)
+```
+
+9.1)
+a) quick presentation
+b) Data verb
+c) Transformation
+d) Summary Function
+e) Data verb
+f) quick presentation
+g) data verb
+h) data verb
+i) data verb
+j) quick presentation
+
+9.3) 
+1)
+```{r}
+diamonds %>%
+  group_by (color) %>%
+  summarise(size = mean (carat, na.rm =TRUE)) %>%
+  arrange (desc(size)) %>%
+  head(1)
+```
+color J size 1.1621
+2) 
+```{r}
+diamonds %>%
+  group_by (clarity) %>%
+  summarise( meanTable= mean(table, na.rm =TRUE)) %>%
+  arrange (desc(meanTable)) %>%
+  head(1)
+```
+Clarity 11, largest avg table= 58.30378
+
