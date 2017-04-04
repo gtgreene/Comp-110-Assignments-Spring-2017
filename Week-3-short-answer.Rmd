@@ -1,6 +1,6 @@
 # Week 3 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -9,5 +9,96 @@ Compiled on `r date()`.
 library(DataComputing)
 ```
 <!-- put your content after this line -->
+5.1, 5.2, 
+6.5,6.6,6.7,6.8
+7.1,7.4,7.5, 7.7, 7.11, 7.12
 
-Here is my content!
+5.1)
+```{r}
+library(mosaicData)
+library(DataComputing)
+ggplot(data=CPS85,aes(x=sex,y=wage ,fill=married))+geom_bar(stat='identity',position='dodge', width=.9)+ facet_wrap(~race,ncol=3) 
+```
+
+5.2)
+```{r}
+library(mosaicData)
+library(DataComputing)
+WorldMap(HappinessIndex, key= country, fill=corruption )
+```
+
+6.5)
+b) state and polling organization
+
+6.6)
+d) Glyph: Rectangle. Graphical attribute: color and text
+
+6.7) a) state
+
+6.8) 
+```{r}
+Small <- NCHS %>% 
+  sample_n(size= 5000)
+ggplot(data=Small,aes(x=bmi,y=weight))+geom_point()+aes(colour=smoker) 
+```
+
+7.1)
+a) mean
+b) mutate
+c) arrange
+d) NewTable <- filter()
+e) select(A,X)
+f) group_by() and summarize()
+
+7.4)
+a)
+b) Tmp should not be used in the second like. Tmp is being defined by the expression
+c) this is missing a pipe, %>% is needed after the first like
+
+7.5)
+a) group_by(sex) and arrange(desc(count))
+b) filter(sex=="F")
+c) filter(sex=="M", count >10)
+d) summarise(total = sum(count))
+e) select(name, count)
+
+7.7) 
+a) Babynames appears at the start of the pipe and then again as an argument of group_by and summarise. It should not appear as an argument.
+BabyNames %>%
+  group_by(year, sex)%>%
+  summarise(total = sum(count))
+
+b) ZipGeography should start the pipe. The <- is storing information. This should be replaced by %>%
+
+ZipGeography %>%
+  group_by(State) %>%
+  summarise(pop = sum(Population))
+
+c)the -> is an invalid symbol in this context. It should be replaced by a %>%
+Minneapolis2013%>%
+  group_by(First)%>%
+  summarise(voteReceived = n())
+
+d) Minneapolis2013 should start the pipe not end it. Group_by should be before the summarise command.
+
+Minneapolis2013%>%
+  group_by(First) %>%
+  summarise(votesReceived = n())
+  
+7.11)
+a) the variables sex, count, meanAge
+b) diagnosis, count, meanAge
+c) sex, diagnosis, count, meanAge
+d) age, diagnosis, count, meanAge
+e) age, count, meanAge
+
+7.12)
+1) nrow()
+2) names()
+3) help()
+4) library()
+5) group_by()
+6) summarise()
+
+
+  
