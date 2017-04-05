@@ -1,6 +1,6 @@
 # Week 5 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,56 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+10.1,10.2,10.3
+11.1,11.3,11.4, 11.5
+
+10.1) The join family of data verbs must have at least one argument that is a data table because their job is to join two tables. They can't join tables unless a table is inputted. One data table can be passed into the function by the chanining syntax.
+
+10.2) This cannot be done because the cases(countries) are not the same in both tables. In the first table, Akrotiri is after Afghanistan, whereas in the second table, Aland is after Afghanistan. If the columns were just copy and pasted, the information would not line up with the right cases.
+
+10.3)
+1)Table B is easiest to see the change from Y2000 to Y2001. I would show this by making a bar chart. The function below shows how to calculate the difference.
+tableB%>%
+  mutate(diff=Y2001-Y2000)
+  
+2)Table C. Having value as a variabl would make it easiest to join the two tables. group_by and summarise() could be used to group the countries and summaries the values.
+
+tableC %>%
+  join(ContinentData) %>%
+  group_by(Continent, Year) %>%
+  summarise (total = sum(Value))
+  
+11.1)
+a) - a case in version one corresponds to a specific name for a certain sex and a given year
+- in cersion two, each case is a name and how many males and females had that name in a given year, either 2012 or 1912
+- In version three, each case is a name for a certain sex and how many babies had that name in 1912 and 2012.
+b) version one is narrow
+c) sex
+d) Because of the variables used in verison one. It is narrow and does not have any cases with N/A
+e) They have different variables so they can contain the same information
+f) key= year, value = 1912, 2012
+g) - F abd M were gathered into nbabies
+- sex
+-the values from F and M
+
+11.3)
+a) c is narrow a is wide
+b) C is narrow b is wide
+c) C is narrow a is wide. b and a are both wide (I think there may be a typo in my book)
+
+11.4) sketched table on paper..
+
+11.5) 
+```{r}
+download.file("http://tiny.cc/dcf/MeasTreatTables.rda", destfile = "MeasTreatTables.rda") 
+  load("MeasTreatTables.rda")
+  
+Tabl113 <-
+  Measurements%>%
+  spread(key=what, value=value)%>%
+  left_join(Treatments)%>%
+  mutate(when= ifelse(treatment_date>date, "Before", "After"))%>%
+  select(-treatment_date)
+```
+  
+```
