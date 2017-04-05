@@ -1,6 +1,6 @@
 # Week 6 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,19 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+12.1, 12.2, 12.3
+13.1, 13.2, 13.3, 13.4
+14.1, 14.3, 14.7, 14.10
+
+12.1)
+```{r}
+BabyNames %>%
+  group_by(sex, name) %>%
+  summarise( total = sum (count)) %>%
+  mutate(namescore= rank(desc(total)))%>%
+  filter(namescore <=5)
+```
+top 5 female names: Mary, Elizabeth, Patricia, Jennifer, Linda
+top 5 male names: James, John, Robert, Michael, William
+
+12.2)
