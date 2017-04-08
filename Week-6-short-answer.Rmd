@@ -7,6 +7,7 @@ Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
 
@@ -26,3 +27,70 @@ top 5 female names: Mary, Elizabeth, Patricia, Jennifer, Linda
 top 5 male names: James, John, Robert, Michael, William
 
 12.2)
+```{r}
+PopularCounts <-
+  BabyNames %>%
+  group_by(year,name)%>%
+  summarise(count = sum(count))%>%
+  mutate(frac_in_top_100 = rank(desc(count)) <= 100) %>%
+  group_by(year, frac_in_top_100)%>%
+  summarise(total = sum(count))
+
+GlyphReady <-
+  PopularCounts %>%
+  spread(frac_in_top_100, total)%>%
+  mutate(frac_in_top_100 = `TRUE`/(`TRUE` + `FALSE`))
+
+GlyphReady %>%
+  ggplot(aes(x=year, y= frac_in_top_100)) + geom_line() + ylim(0,NA)
+```
+
+12.3)
+a) summary function
+b) neither summary nor transformation. It is a pair of values not a single value which is necessary for a summary function
+c) summary function
+d) transformation function
+e) transformation function
+f) summary function
+g) transformation function
+h) summary function. The whole set of dates is turned into a single value.
+
+13.1) 
+1) 7 verticies; China, germany, France, UK, Italy, USA, USSR
+2) 9 edges
+
+13.2) 
+1) A, C, B, D
+2) Table 2
+3) Table 1 shows an ede from B to C but there is no edge between B and C. Table 3 shows an edge between three points. Edges only are between 2 vertices.
+
+13.3)
+Table 2 gives the information needed to draw the graph shown.
+
+13.4) 
+1. Exports is mapped to the size of the letter.
+2. Pop is mapped to the shape of the gray symbol. 
+
+14.1)
+```{r}
+mosaicData::CPS85 %>%
+  ggplot(aes(x = sex, y= wage)) + geom_boxplot(aes(fill= sex))
+```
+
+14.3) The most likely hieght for women is around 1.55 m and for men around 1.7 m.
+
+14.7) 
+```{r}
+mosaicData::CPS85 %>%
+  ggplot(aes(x =educ, y= wage, color= sex)) +
+  geom_point() + 
+  stat_smooth(method = "lm") + 
+  ylim (0, 15)
+```
+
+14.10)
+```{r}
+mosaicData::Galton %>%
+  ggplot( aes( x= height, group = sex)) + 
+  geom_density( aes( color = sex, fill = sex, alpha = 0.5))
+```
