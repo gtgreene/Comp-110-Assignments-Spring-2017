@@ -1,6 +1,6 @@
 # Week 8 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,8 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+17.2)
+1. Variables included in the tree are rooms (living area, bathroom, bedroom, fire place). The rooms are the explanatory variables. And the response variable is price.
+2. No the number of bathrooms does not make a difference.
+3. 179796 - 151424 = 28, 372. So houses with 2 baths are almost $30,000 more than houses with 1.5 baths.
+4. Yes. For houses larger than 2816 square feet, fire places are associated with a higher cost. 
