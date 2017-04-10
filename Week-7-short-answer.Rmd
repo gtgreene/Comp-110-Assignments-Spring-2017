@@ -1,6 +1,6 @@
 # Week 7 Short Answer Questions
 
-## Your name should appear here!
+## Gretchen Greene
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,54 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+15.1, 15.2,
+16.1, 16.2, 16.3
+
+15.1)
+- mdy()
+- mdy()
+- dmy()
+- mdy_hm(
+- mdy()
+
+15.2)
+a) tidyr::extract_numeric() will work correctly
+b) tidyr::extract_numeric()
+c) as.numeric() will work correctly
+d)tidyr::extract_numeric()
+e) as.numeric()
+f)tidyr::extract_numeric()
+g) neighter will work. There are characters and symbols in the string
+h)tidyr::extract_numeric()
+i)tidyr::extract_numeric()
+
+16.1)
+```{r}
+BabyNames %>%
+  filter( sex == "M") %>%
+  group_by(name) %>%
+  summarise (total = sum (count)) %>%
+  filter (grepl("[aeiou]$", name)) %>%
+  arrange( desc(total)) %>%
+  head(10)
+```
+
+1. George, 2. Joshua, 3. Jose, 4. Kyle, 5. Lawrence, 6. Joe, 7. Willie, 8. Jesse, 9. Bruce, 10. Eugene
+
+```{r}
+BabyNames %>%
+  group_by(name)%>%
+  summarise (total =sum(count)) %>%
+  filter(grepl(".*(jo$|joe$)", name))%>%
+  arrange (desc(total))%>%
+  head(10)
+```
+1. Maryjo 2. Billiejo 3. Marijo 4. Bobbijo 5. Bobbiejo, 6. Bettyjo, 7. Alejo 8. Amyjo 9. Billyjoe, 10. Jojo
+
+16.2)
+One digit from 0 to 9 is pulled out followed by two digits from 0 to 9. Then any character of either a space, period, or dash. Then three characters from 0 to 9. Then four characters from 0 to 9.
+
+16.3)
+1. Two letter strings
+2. For the pattern A[LKSZRAP] there are seven matching strings. For D[EC] there are two strings. There are 61 total patterns
+3. These are the two letter abbreviations for US states and territories. 
